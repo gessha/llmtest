@@ -1,0 +1,15 @@
+{
+    "name": "llmtest.georgi",
+    "description": "Quick test of running LLMs inside clickable",
+    "architecture": "@CLICK_ARCH@",
+    "title": "llmtest",
+    "hooks": {
+        "llmtest": {
+            "apparmor": "llmtest.apparmor",
+            "desktop":  "llmtest.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Georgi Georgiev <gosh.georgiev@gmail.com>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}
