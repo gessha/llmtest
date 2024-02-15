@@ -1,3 +1,12 @@
 clickable_minimum_required: 8.0.0
 builder: cmake
 kill: llmtest
+
+install_lib:
+  - "$GGML_LIB_INSTALL_DIR/install/lib/libggml.so*"
+
+libraries:
+  ggml:
+    builder: cmake
+    make_args: 
+      - "gpt-2-backend"
