@@ -1,3 +1,3 @@
 [submodule "lib/ggml"]
-	path = lib/ggml
+	path = libs/ggml
 	url = https://github.com/gessha/ggml
