@@ -3,7 +3,7 @@ builder: cmake
 kill: llmtest
 
 install_lib:
-  - "$GGML_LIB_INSTALL_DIR/install/lib/libggml.so*"
+  - "${GGML_LIB_INSTALL_DIR}/lib/libggml.so*"
 
 libraries:
   ggml:
