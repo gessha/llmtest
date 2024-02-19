@@ -5,6 +5,8 @@ set(
     SRC
     plugin.cpp
     model.cpp
+    common.cpp
+    common-ggml.cpp
 )
 
 set(CMAKE_AUTOMOC ON)
