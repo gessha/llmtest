@@ -14,29 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import QtQuick 2.7
-import QtQuick.Controls 2.2
-import QtQuick.Layouts 1.3
-import Qt.labs.settings 1.0
+#ifndef MODELFETCH_PLUGIN_H
+#define MODELFETCH_PLUGIN_H
 
-import Lomiri.Components 1.3
+#include <QQmlExtensionPlugin>
 
-import Example 1.0
-import Model 1.0
+class ModelFetchPlugin : public QQmlExtensionPlugin {
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-MainView {
-    id: root
-    objectName: 'mainView'
-    applicationName: 'llmtest.georgi'
-    automaticOrientation: true
+public:
+    void registerTypes(const char *uri);
+};
 
-    width: units.gu(45)
-    height: units.gu(75)
-
-    PageStack {
-        id: pageStack
-        Component.onCompleted: {
-            pageStack.push(Qt.resolvedUrl("Home.qml"));
-        }
-    }
-}
+#endif
