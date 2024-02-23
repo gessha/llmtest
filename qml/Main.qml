@@ -35,8 +35,16 @@ MainView {
 
     PageStack {
         id: pageStack
-        Component.onCompleted: {
-            pageStack.push(Qt.resolvedUrl("Home.qml"));
+        Component.onCompleted: pageStack.push(homePage);
+
+        Home {
+            id: homePage
+            visible: false
+        }
+
+        ModelFetch {
+            id: modelFetchPage
+            visible: false
         }
     }
 }

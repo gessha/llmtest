@@ -57,19 +57,25 @@ Page {
             Layout.fillHeight: true
         }
 
+        Text {
+            id: modelName
+            text: "No model loaded..."
+        }
+
         Item {
             Layout.fillHeight: true
         }
     }
 
     Connections {
-        target: ModelFetch // Assuming 'modelFetchPage' is the ID or object name of ModelFetch.qml
+        target: modelFetchPage // Assuming 'modelFetchPage' is the ID or object name of ModelFetch.qml
 
         // Signal received from ModelFetch.qml
         onFileSelected: {
             // Handle the selected file information
             selectedFile = fileName;
             console.log("RECEIVED THE FILE: ", selectedFile);
+            modelName.text = selectedFile;
             pageStack.pop();
             // Pop the ModelFetch.qml page from the stack
         }
