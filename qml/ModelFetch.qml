@@ -7,6 +7,8 @@ import Lomiri.Components 1.3
 import Lomiri.DownloadManager 1.2
 import Qt.labs.folderlistmodel 2.12
 
+import ModelFetch 1.0
+
 Page {
     id: modelFetch
     objectName: 'modelFetch'
@@ -18,11 +20,15 @@ Page {
 
     header: PageHeader {
         id: header
-        title: i18n.tr('Model select page')
+        title: i18n.tr('Model Download page')
     }
 
     DownloadManager {
         id: manager
+    }
+
+    ModelFetch {
+        id: modelFetchObj
     }
 
     ColumnLayout {
@@ -165,14 +171,18 @@ Page {
         Connections {
             target: manager
             onDownloadFinished: {
-                console.log(path);
+                
                 var pathParts = path.split("/");
                 var fileName = pathParts[pathParts.length-1];
                 var desitinationBasename = "/home/phablet/.local/share/llmtest.georgi";
                 var targetFilename = desitinationBasename + "/" + fileName;
+                
+                console.log(path);
                 console.log(fileName, targetFilename);
-                fileSelected(path);
                 console.log("fileSelected signal emitted with filePath:", path);
+                
+                modelFetchObj.saveModel(path);
+                fileSelected(path);
             }
         }
 

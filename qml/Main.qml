@@ -46,5 +46,10 @@ MainView {
             id: modelFetchPage
             visible: false
         }
+
+        ModelSelect {
+            id: modelSelectPage
+            visible: false
+        }
     }
 }

@@ -78,7 +78,8 @@ struct gpt2_model {
     struct ggml_tensor * memory_v;
 
     //
-    struct ggml_context * ctx;
+    struct ggml_context * ctx_w;
+    struct ggml_context * ctx_kv;
 
     ggml_backend_t backend = NULL;
 
@@ -96,28 +97,28 @@ public:
     ~Model() = default;
 
     Q_INVOKABLE void speak(const QString &text);
-//     Q_INVOKABLE void capitalizeAndDisplay(const QString &text);
+    Q_INVOKABLE void load_model(const QString &model_name);
+    Q_INVOKABLE void prompt(const QString &model_prompt);
 
 private:
     gpt_params params;
     gpt_vocab vocab;
     gpt2_model model;
     ggml_backend_buffer_t buf_compute;
-    struct ggml_allocr * allocr;
+    ggml_gallocr_t allocr;
 
     bool gpt2_model_load(const std::string & fname, gpt2_model & model, gpt_vocab & vocab, int n_ctx, int n_gpu_layers);
     struct ggml_cgraph * gpt2_graph(
-            const gpt2_model & model,
-            struct ggml_allocr * allocr,
-            const int n_past,
-            const std::vector<gpt_vocab::id> & embd_inp);
+        const gpt2_model & model,
+        const int n_past,
+        const int n_tokens);
     bool gpt2_eval(
-            const gpt2_model & model,
-            struct ggml_allocr * allocr,
-            const int n_threads,
-            const int n_past,
-            const std::vector<gpt_vocab::id> & embd_inp,
-                  std::vector<float>         & embd_w);
+        const gpt2_model & model,
+        ggml_gallocr_t allocr,
+        const int n_threads,
+        const int n_past,
+        const std::vector<gpt_vocab::id> & embd_inp,
+              std::vector<float>         & embd_w);
 // signals:
 //     // Signal to emit the capitalized text
 //     void displayCapitalizedText(const QString &text);

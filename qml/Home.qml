@@ -8,8 +8,6 @@ import Lomiri.Components 1.3
 import Example 1.0
 import Model 1.0
 
-
-
 Page {
     id: homePage
     anchors.fill: parent
@@ -19,12 +17,6 @@ Page {
         id: ml_model
     }
 
-    // ModelFetch {
-    //     id: modelFetchPage
-    // }
-    // import "ModelFetch.qml" as ModelFetch
-
-
     header: PageHeader {
         id: header
         title: i18n.tr('Local LLM test')
@@ -32,14 +24,22 @@ Page {
         /* the menu on the right side */
         trailingActionBar.actions: [
 
-             Action {
-                iconName: "help"
-                text: i18n.tr("Models")
-                onTriggered:{
-                    pageStack.push(Qt.resolvedUrl("ModelFetch.qml"));
-                    // pageStack.push(modelFetchPage);
-                }
-             }
+            Action {
+               iconName: "import"
+               text: i18n.tr("Model Fetch")
+               onTriggered:{
+                   pageStack.push(modelFetchPage);
+               }
+            },
+
+            Action {
+               iconName: "select"
+               text: i18n.tr("Model Select")
+               onTriggered:{
+                   pageStack.push(modelSelectPage);
+               }
+            }
+            
         ]
     }
 
@@ -58,8 +58,34 @@ Page {
         }
 
         Text {
+            id: statusText
+            text: "Status: "
+        }
+
+        Text {
             id: modelName
             text: "No model loaded..."
+        }
+
+        Button {
+            id: modelLoadButton
+            text: "Load model"
+            onClicked: {
+                ml_model.load_model("/home/phablet/.local/share/ggml-model.bin");
+            }
+        }
+
+        TextField {
+            id: promptField
+            placeholderText: i18n.tr('Prompt >')
+        }
+
+        Button {
+            id: promptButton
+            text: "Send"
+            onClicked: {
+                ml_model.prompt(promptField.text);
+            }
         }
 
         Item {
@@ -68,7 +94,7 @@ Page {
     }
 
     Connections {
-        target: modelFetchPage // Assuming 'modelFetchPage' is the ID or object name of ModelFetch.qml
+        target: modelFetchPage
 
         // Signal received from ModelFetch.qml
         onFileSelected: {
@@ -77,7 +103,6 @@ Page {
             console.log("RECEIVED THE FILE: ", selectedFile);
             modelName.text = selectedFile;
             pageStack.pop();
-            // Pop the ModelFetch.qml page from the stack
         }
     }
 

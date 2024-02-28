@@ -1,4 +1,6 @@
 {
-    "policy_groups": [],
+    "policy_groups": [
+        "debug",
+    ],
     "policy_version": 20.04
 }

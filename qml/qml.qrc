@@ -3,5 +3,6 @@
         <file>Main.qml</file>
         <file>Home.qml</file>
         <file>ModelFetch.qml</file>
+        <file>ModelSelect.qml</file>
     </qresource>
 </RCC>

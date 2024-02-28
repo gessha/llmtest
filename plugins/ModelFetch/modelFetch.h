@@ -11,6 +11,7 @@ public:
     ~ModelFetch() = default;
 
     Q_INVOKABLE void speak(const QString &text);
+    Q_INVOKABLE void saveModel(const QString &uri);
 //     Q_INVOKABLE void capitalizeAndDisplay(const QString &text);
 
 // signals:
